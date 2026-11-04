@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Walk With Me — Instructions, credits and AI disclosure</title>
+<style>body{max-width:850px;margin:48px auto;padding:0 24px;font:17px/1.7 system-ui,sans-serif;color:#172d31;background:#fbfaf5}h1,h2{line-height:1.2}h1{font-size:40px}h2{margin-top:40px}a{color:#145c70}dt{font-weight:700;margin-top:12px}dd{margin-left:0}section{border-top:1px solid #cbd1c9;margin-top:40px;padding-top:12px}code{background:#e9ece5;padding:2px 5px}footer{margin-top:48px;font-size:14px;color:#536367}</style>
+<h1>Walk With Me / 回声同行</h1>
+<p>A four-room puzzle about keeping yourself company. Record your footsteps, then cooperate with an echo of your past self.</p>
+<p>Human entrant: <strong>何添雨</strong> · TapTap studio: RainStar工作室 · Prepared for thatgamejam #02, November 4, 2026. This document describes the build; it does not assert successful event submission.</p>
+<h2>Windows build and startup</h2>
+<p>Extract the entire <a href="Walk-With-Me-Windows-x64.zip">Windows x64 ZIP</a> and run <code>Walk With Me.exe</code> inside its folder. Keep the accompanying game directory and DLLs together. Windows 10/11 x64, .NET Framework 4.8 and Microsoft Edge WebView2 Evergreen Runtime are required. The app is unsigned. Once prerequisites are installed, no Node.js, server or network connection is needed to play.</p>
+<p>The optional TapTap H5 edition supports landscape touch controls. It supplements the Windows build. First launch defaults to English; use the language button for full Simplified Chinese.</p>
+<h2>Controls and rules</h2>
+<dl><dt>Move</dt><dd>WASD or arrow keys. On phones, use the direction buttons.</dd>
+<dt>Record</dt><dd>R starts or finishes a recording; maximum 12 seconds. Starting clears the old echo and restores the initial room. Finishing restores all room state and begins playback.</dd>
+<dt>Echo</dt><dd>One echo follows your timed path without collision solving, then holds its final position indefinitely. It does not loop. Both actors activate pressure plates and pass through one another; only the player can finish a room.</dd>
+<dt>Bridges</dt><dd>They remain for 2.4 seconds after plates release. Flashing stripes and a countdown show this grace period. If a bridge vanishes beneath the player, the attempt resets.</dd>
+<dt>Other controls</dt><dd>T resets the room; Esc pauses. Losing focus also pauses replay time and clears input. Resume explicitly. Sound can be muted.</dd></dl>
+<p>Click Begin, solve four rooms and reach each exit. Room 1 teaches leaving an echo on a plate. Room 2 adds two plates together. Room 3 adds a recorded wait between two plates. Room 4 combines waiting with meeting your echo. The ending lights the footsteps you left behind. Use How to play for progressive hints and full routes.</p>
+<p><a href="walk-with-me-full.mp4">Complete gameplay video</a>: a continuous, unaccelerated, silent browser capture using actual keyboard input, from startup through all four rooms to the ending (about 60 seconds with a known solution). It is not a first-time play-duration measurement or a physical-phone recording. Target first-time play is 5–8 minutes; independent timing remains pending.</p>
+<h2>AI-generated content — explicit disclosure</h2>
+<p><strong>This game contains AI-generated content.</strong> OpenAI Codex, identified in the development session as based on GPT-6, assisted with JavaScript/C# code, level implementation, English writing, Simplified Chinese translation, procedural Canvas/SVG artwork, icon generation code, synthesized sound-effect code, documentation, and build/test tools. A human supplied the initial concept, gameplay constraints and direction. The exact backend model revision was not separately verified.</p>
+<p>No AI image-generation service, downloaded artwork, cloned voice, sampled sound, third-party music recording or official theme recording is included. The graphics are drawn with code; effects use Web Audio oscillators. No other AI tools were used in this project session.</p>
+<h2>Assets, licenses and verification limits</h2>
+<p>Game graphics, icon, levels and synthesized effects were created for this project with the assistance disclosed above. System fonts are referenced and not redistributed. Microsoft WebView2 SDK 1.0.4314.35 supplies the Windows DLLs; the Windows archive includes WEBVIEW2-LICENSE.txt and WEBVIEW2-NOTICE.txt. The Evergreen runtime and .NET are prerequisites and are not bundled. Full details are in CREDITS.md in the source archive.</p>
+<p>The four rooms were completed with real keyboard input in browser and Windows tests. Recording limits, early finish, re-recording, reset, plate/bridge behavior, pause, focus loss, resize and language switching were checked. The entrant reported that TapTap's official QR phone test worked; phone model and first-play time were not supplied. No clean-Windows-machine or Mac test is claimed.</p>
+<p>The official theme is credited by the event to Jason Grace. The development agent has not actually listened to or perceptually analyzed it. The recording is absent, no musical-fit analysis is claimed, and a truthful theme-inspiration statement remains pending. A replaceable local music interface exists.</p>
+<section lang="zh-CN"><h2>中文说明与 AI 使用披露</h2>
+<p>《回声同行》是一款四关俯视角解谜游戏：录下最多12秒的行动，房间恢复起点后，与按原时间轨迹行动的回声配合。回声播完停在终点，持续踩机关，不循环；玩家才能触发出口。光桥松开机关后保留2.4秒，以闪烁条纹和倒计时提示，消失时若仍在桥上会重置。</p>
+<p>Windows版完整解压后运行 Walk With Me.exe，需要 Windows 10/11 x64、.NET Framework 4.8 和 Edge WebView2 Runtime。默认英语，可切换完整简体中文。WASD/方向键移动，R开始/提前结束录制，T重置，Esc暂停；切出窗口也暂停。手机H5版横屏使用屏幕按钮，可静音。</p>
+<p><strong>使用了AI生成内容。</strong> OpenAI Codex（本会话标识为基于GPT-6）辅助生成代码、关卡实现、中英文文字、程序画面与图标、合成音效代码、文档、构建和测试工具。人工提供概念、约束与方向。未使用AI生图服务、外部美术、克隆语音、采样音乐或官方主题录音。第三方Windows组件为Microsoft WebView2 SDK，包内附许可与NOTICE。开发代理尚未实际听取主题音频，不编造听后分析。</p>
+<p>本说明不含私人邮箱。参赛署名：何添雨；TapTap开发者：RainStar工作室。完整通关视频为已知解法的实际键盘操作，不能代表独立新玩家通关时间。当前活动仅保存草稿，尚未提交。</p></section>
+<footer>Keep this document beside the named Windows ZIP and MP4 when hosting it, or replace its relative links with the final public download URLs. Do not treat local files as online submission links.</footer>
+</html>

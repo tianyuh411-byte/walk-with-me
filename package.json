@@ -1,0 +1,13 @@
+{
+  "name": "walk-with-me",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A small puzzle about keeping yourself company.",
+  "scripts": {
+    "start": "node tools/server.cjs",
+    "test": "node --test tests/engine.test.cjs",
+    "build": "powershell -NoProfile -ExecutionPolicy Bypass -File tools/build.ps1",
+    "test:browser": "node tools/playtest.cjs",
+    "test:languages": "node tools/language-check.cjs"
+  }
+}

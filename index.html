@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#111b20"><meta name="description" content="A small puzzle about keeping yourself company. Record a walk. Let your echo light the way.">
+  <title>Walk With Me — a small echo puzzle</title>
+  <link rel="icon" href="assets/icon.svg" type="image/svg+xml"><link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="app">
+  <header class="masthead"><a class="wordmark" href="#" id="home-link" aria-label="Walk With Me home"><span class="logo">◈</span> WALK WITH ME <span class="edition">AN ECHO PUZZLE</span></a><div class="utilities"><button id="language" aria-label="Switch to Simplified Chinese">简体中文</button><button id="sound" aria-label="Enable sound" aria-pressed="false">Sound off <span>◌</span></button><button id="help" aria-label="How to play">How to play <span>↗</span></button></div></header>
+  <main>
+    <section id="home" class="home">
+      <div class="home-copy"><div class="eyebrow"><span class="tiny-star">✦</span> A SMALL GAME ABOUT COMPANY</div><h1>You don’t have<br>to walk <em>alone.</em></h1><p class="intro">Leave a little of yourself behind.<br>Let your echo light the way ahead.</p><button class="primary" id="begin">Let’s walk <span>↗</span></button><button class="continue hidden" id="continue">Continue your walk →</button><div class="home-note">FOUR QUIET ROOMS <span>·</span> ABOUT 5–8 MINUTES</div></div>
+      <div class="home-art" aria-hidden="true"><canvas id="cover" width="780" height="720"></canvas><div class="art-label label-you"><i class="actor-dot"></i> YOU, NOW</div><div class="art-label label-echo"><i class="echo-dot"></i> YOU, A MOMENT AGO</div><div class="art-caption"><span>01 — 04</span> A past step. A new possibility.</div></div>
+      <div class="home-bottom"><span>TAKE YOUR TIME. YOUR ECHO WILL WAIT.</span><span>MADE OF FOOTSTEPS & LITTLE LIGHTS <span class="tiny-star">✦</span></span></div>
+    </section>
+    <section id="play" class="play hidden" aria-label="Puzzle room">
+      <div class="room-heading"><div><div class="eyebrow" id="chapter">ROOM 01 / 04</div><h2 id="room-title">A first hello</h2></div><p id="room-subtitle">Some paths are easier with company.</p><div class="room-progress" aria-label="Room progress" id="progress"></div></div>
+      <div class="stage-wrap"><canvas id="stage" width="1152" height="576" aria-label="Top down puzzle. White circle: you. Dashed violet ring: echo. Diamonds: pressure plates. Striped tiles: bridges." role="img"></canvas><div class="stage-note" id="stage-note">Find the diamond marked A.</div><div class="legend"><span><i class="actor-dot"></i> You</span><span><i class="echo-dot"></i> Your echo</span><span>◇ Plate</span><span>▤ Bridge</span></div></div>
+      <div class="play-toolbar"><div class="status-block"><span class="status-led" id="status-led"></span><div><span id="status">Ready</span><small id="status-detail">Your next step starts here.</small></div></div><div class="tape"><div class="tape-label"><span id="tape-label">A LITTLE TIME, KEPT FOR LATER</span><span id="timer">12.0s</span></div><div class="tape-track"><div id="tape-fill"></div><i id="tape-head"></i></div></div><button id="record" class="record"><span class="record-mark">●</span><span id="record-label">Record a walk</span><kbd>R</kbd></button><button id="retry" class="icon-button" aria-label="Reset room (T)">↺ <kbd>T</kbd></button><button id="pause" class="icon-button" aria-label="Pause (Escape)">Ⅱ</button></div>
+      <div class="below-stage"><span id="context-hint" aria-live="polite">Press R to record. Every recording begins from your first step.</span><span class="keys"><kbd>WASD</kbd> / <kbd>↑↓←→</kbd> move <span>·</span> <kbd>Esc</kbd> pause</span></div>
+      <div class="touch-controls" aria-label="Touch controls"><button data-dir="up" aria-label="Move up">↑</button><div><button data-dir="left" aria-label="Move left">←</button><button data-dir="down" aria-label="Move down">↓</button><button data-dir="right" aria-label="Move right">→</button></div></div>
+    </section>
+    <section id="ending" class="ending hidden"><div class="eyebrow">EVERY STEP BROUGHT YOU HERE</div><h1>Some company<br><em>stays with you.</em></h1><p>What you left behind became the light ahead.</p><canvas id="ending-art" width="1000" height="220" aria-label="Your recorded footsteps become a trail of lights."></canvas><button class="primary" id="again">Walk again <span>↗</span></button><div class="credits">An original four-room puzzle · Created with AI assistance<br>Code, writing & procedural visuals: OpenAI Codex (GPT-6)<br>Sound effects synthesized in the game · No theme recording included</div></section>
+  </main>
+  <footer><span>A LITTLE DISTANCE. A LITTLE COMPANY.</span><span id="footer-room">WALK WITH ME <span class="footer-star">✧</span> 2026</span></footer>
+</div>
+<dialog id="modal"><div class="modal-tag" id="modal-tag">TAKE A BREATH</div><h2 id="modal-title">A moment to pause.</h2><div id="modal-copy"></div><div class="modal-actions" id="modal-actions"></div></dialog>
+<script src="js/engine.js"></script><script src="js/strings.js"></script><script src="js/levels.js"></script><script src="js/audio.js"></script><script src="js/render.js"></script><script src="js/main.js"></script>
+</body>
+</html>
