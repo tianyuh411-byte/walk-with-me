@@ -7,7 +7,7 @@ const rt=createRequire(path.join(process.env.WWM_NODE_MODULES||'C:/Users/34813/.
   const act=action=>execFileSync('powershell',['-NoProfile','-ExecutionPolicy','Bypass','-File',path.join(__dirname,'desktop-window.ps1'),'-GameProcessId',process.env.WWM_PROCESS_ID,'-Action',action],{encoding:'utf8'});
   act('restore');await p.waitForTimeout(400);await p.reload();await p.waitForFunction(()=>window.WWMDebug);await p.click('#begin');await p.keyboard.press('r');await p.waitForTimeout(500);
   assert.equal((await p.evaluate(()=>WWMDebug.snapshot())).mode,'recording');
-  act('minimize');await p.waitForTimeout(400);const frozen=await p.evaluate(()=>WWMDebug.snapshot());assert.equal(frozen.paused,true);
+  act('minimize');await p.waitForFunction(()=>WWMDebug.snapshot().paused,null,{timeout:3000,polling:100});const frozen=await p.evaluate(()=>WWMDebug.snapshot());assert.equal(frozen.paused,true);
   await p.waitForTimeout(800);assert.equal((await p.evaluate(()=>WWMDebug.snapshot())).time,frozen.time);
   act('restore');await p.waitForTimeout(300);assert.equal((await p.evaluate(()=>WWMDebug.snapshot())).paused,true);
   await p.click('#modal-actions button:first-child');await p.waitForFunction(t=>WWMDebug.snapshot().time>t,frozen.time,{timeout:5000});

@@ -73,8 +73,24 @@ Build outputs:
 
 Official rules were fetched directly on 2026-11-04 from https://itch.io/jam/thatgamejam02. Deadline: **2026-11-08 15:59 Asia/Shanghai** (07:59 UTC; November 7, 23:59 PT). Submit on one platform only. English default and a Windows/Mac build are required. AI use must be disclosed. A new original work is required. See `docs/JAM.md`, `docs/SUBMISSION.md` and `CREDITS.md`.
 
-**The official theme audio has not been listened to by this development agent.** No claim is made that the current emotional structure matches it. No official recording, sample, cover, third-party music or downloaded media is shipped. `WWMSound.setMusic(localUrl)` is a replaceable local music interface; a later authorized original recording may be supplied unmodified, with the required credit and jam-only permission. The current game is mechanically complete but theme interpretation and actual posting remain pending.
+Entrant’s actual listening impression, supplied November 5, 2026: “空灵感，有种故事发生前的铺垫，悠长启迪人” — an ethereal feeling, a prelude before a story begins, lingering and thought-provoking. The creative response is waiting for a past self to answer, bridges becoming reachable, and remembered footsteps lighting the ending. This is an attributed creative interpretation. The development agent did not listen; no musical sections, instrumentation, tempo or timestamps are invented. No official recording is bundled; original synthesized effects and a replaceable local music interface remain.
 
-TapTap preparation on November 4: app 1027904 under RainStar工作室; landscape H5 package uploaded and bound; entrant reported the official QR phone test worked, including recording and Chinese switching. Store text, icon, promotional art, three actual screenshots and an actual keyboard-driven four-room demonstration video are saved. Activity 18 / creation event 29 questionnaire is saved as a draft (not submitted). Windows download hosting, a durable video link and an online AI-disclosure document remain pending. See `docs/JAM.md` and `docs/jam-entry.html`.
+Updated November 5, 2026 (Beijing). These are three independent states:
+
+| Item | Actual platform evidence | Result |
+| --- | --- | --- |
+| Game version V-20261104 | Formal submit HTTP422: “发布额度不足：滚动 168 小时最多首次发布 3 款、滚动 24 小时最多首次发布 1 款，请调整发布安排”. Readback draft / “未发布”, only draft_created. | Not submitted to review; not online. Content precheck passed, no blockers. Immediate release after approval remains authorized. |
+| AI declaration | ai-declaration / reviewing | Awaiting qualification review. Truthful AI disclosure retained. |
+| thatgamejam #02 | Last successful activity read: “已拒绝”; reason “游戏发布状态应为「正式上线」或「试玩」” | Questionnaire 8/8 submitted once, but not accepted participation. “提交成功” was only a receipt acknowledgement. |
+
+Store: https://developer.taptap.cn/v3/520515/app/1027904/store/update
+
+AI: https://developer.taptap.cn/v3/520515/app/1027904/store/qualifications
+
+Activity: https://developer.taptap.cn/v3/520515/activity-center/18
+
+The entrant consented to the platform agreement, confirmed independent-game upgrade, and accepted the AI-review warning before the latest submit attempt. No blind retry or quota workaround. The refusal does not identify which rolling quota is exhausted or its exact reset time.
+
+Public builds/source/video: https://github.com/tianyuh411-byte/walk-with-me/releases . Instructions/AI disclosure: https://tianyuh411-byte.github.io/walk-with-me/ . See docs/DELIVERY.md for verification and remaining requirements.
 
 Known limits: independent first-play duration measurement pending; only this Windows machine and local Edge/WebView2 were tested by the agent; phone test success is entrant-reported, with device details unspecified; no clean-machine or Mac test; no Mac binary; current-room only save; no full screen-reader equivalent for the spatial puzzle. No advertising, store, leaderboard, networking or level editor.

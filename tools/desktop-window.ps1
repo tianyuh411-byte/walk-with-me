@@ -1,4 +1,4 @@
-param([Parameter(Mandatory=$true)][int]$GameProcessId, [ValidateSet('restore','minimize','resize','close')][string]$Action)
+param([Parameter(Mandatory=$true)][int]$GameProcessId, [ValidateSet('restore','minimize','resize','close','inspect')][string]$Action)
 $ErrorActionPreference = 'Stop'
 Add-Type -TypeDefinition @'
 using System;
@@ -11,6 +11,9 @@ public class WWMWindow {
     [DllImport("user32.dll", CharSet=CharSet.Unicode)] public static extern int GetWindowText(IntPtr window, StringBuilder title, int count);
     [DllImport("user32.dll")] public static extern bool ShowWindow(IntPtr window, int mode);
     [DllImport("user32.dll")] public static extern bool SetForegroundWindow(IntPtr window);
+    [DllImport("user32.dll")] public static extern bool IsWindowVisible(IntPtr window);
+    [DllImport("user32.dll")] public static extern bool IsIconic(IntPtr window);
+    [DllImport("user32.dll")] public static extern IntPtr GetForegroundWindow();
     [DllImport("user32.dll")] public static extern bool MoveWindow(IntPtr window, int x, int y, int width, int height, bool redraw);
     [DllImport("user32.dll")] public static extern bool PostMessage(IntPtr window, uint message, IntPtr wp, IntPtr lp);
     public static IntPtr Find(int processId) {
@@ -29,5 +32,6 @@ switch ($Action) {
     'minimize' { [WWMWindow]::ShowWindow($window,6) | Out-Null }
     'resize' { [WWMWindow]::MoveWindow($window,120,90,1000,780,$true) | Out-Null }
     'close' { [WWMWindow]::PostMessage($window,0x10,[IntPtr]::Zero,[IntPtr]::Zero) | Out-Null }
+    'inspect' { @{visible=[WWMWindow]::IsWindowVisible($window);minimized=[WWMWindow]::IsIconic($window);foreground=([WWMWindow]::GetForegroundWindow() -eq $window)} | ConvertTo-Json }
 }
 Write-Output "Native game window action: $Action"

@@ -1,6 +1,6 @@
-# Draft entry materials
+# Entry materials
 
-Status: TapTap app 1027904 uploaded; official activity questionnaire saved as a draft. **Not submitted.** Stable Windows download, video and AI-document links remain pending. Do not call the entry theme-complete yet.
+Status: public Windows/video/source/AI links supplied. Questionnaire submitted once but activity rejected because game was not live/trial. Version submission refused by first-publication quota; AI declaration reviewing. See JAM.md and DELIVERY.md.
 
 ## Title
 
@@ -28,10 +28,14 @@ Four small rooms, one gentle idea, and a trail of little lights at the end. Desi
 
 **Credits:** original procedural graphics and synthesized effects created for this project. Windows WebView2 components are from Microsoft and distributed with their license/notices. The event theme was composed by Jason Grace; the provided recording is not included in this build.
 
-## Required before publishing
+## Theme interpretation
+
+Entrant’s actual listening impression, supplied November 5, 2026: “空灵感，有种故事发生前的铺垫，悠长启迪人” — an ethereal feeling, a prelude before a story begins, lingering and thought-provoking. The creative response is waiting for a past self to answer, bridges becoming reachable, and remembered footsteps lighting the ending. This is an attributed creative interpretation. The development agent did not listen; no musical sections, instrumentation, tempo or timestamps are invented. No official recording is bundled; original synthesized effects and a replaceable local music interface remain.
+
+## Required before successful participation
 
 - Entrant name and questionnaire facts are supplied and saved privately; public credit: 何添雨 / RainStar工作室. Do not include the private email in release archives.
-- Genuine listening to the official theme and a truthful inspiration paragraph based on what was heard; current game makes no track-fit claim.
+- Resolve first-publication quota, submit version, obtain live/trial state, then verify activity acceptance. No exact quota reset time was returned.
 - Independent human run, particularly first-time clarity, timing and audio feedback.
 - Use the official TapTap event (selected by the entrant); do not also submit to itch.io. Ordinary TapTap H5 approval is not evidence of event submission.
 - Use the final archives and checksums. Check Windows platform label, download filenames, English description and visible AI disclosure in the actual entry form.

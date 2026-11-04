@@ -45,9 +45,16 @@ internal sealed class WalkWithMe : Form {
             }
         };
         Deactivate += (sender, args) => {
-            if (ready && view.CoreWebView2 != null) view.CoreWebView2.ExecuteScriptAsync("window.dispatchEvent(new Event('blur'));");
+            PauseGame();
+        };
+        Resize += (sender, args) => {
+            // A window minimized before it acquired focus need not raise Deactivate.
+            if (WindowState == FormWindowState.Minimized) PauseGame();
         };
         FormClosed += (sender, args) => { ready = false; view.Dispose(); };
+    }
+    private void PauseGame() {
+        if (ready && view.CoreWebView2 != null) view.CoreWebView2.ExecuteScriptAsync("window.dispatchEvent(new Event('blur'));");
     }
     [STAThread]
     private static void Main() {

@@ -2,6 +2,7 @@
 const {createRequire}=require('node:module'),path=require('node:path'),fs=require('node:fs/promises'),assert=require('node:assert/strict');
 const requireRuntime=createRequire(path.join(process.env.WWM_NODE_MODULES||'C:/Users/34813/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules','_wwm_test.cjs'));
 const {chromium}=requireRuntime('playwright');
+const {execFileSync}=require('node:child_process');
 (async()=>{
  const browser=process.env.WWM_CDP?await chromium.connectOverCDP(process.env.WWM_CDP):await chromium.launch({channel:'msedge',headless:true});
  const context=process.env.WWM_CDP?browser.contexts()[0]:await browser.newContext({viewport:{width:1440,height:1000},...(process.env.WWM_VIDEO?{recordVideo:{dir:path.resolve(process.env.WWM_VIDEO),size:{width:1440,height:1000}}}:{})});
@@ -9,13 +10,30 @@ const {chromium}=requireRuntime('playwright');
  const errors=[];page.on('pageerror',e=>errors.push(e.message));page.on('console',m=>{if(m.type()==='error')errors.push(m.text());});
  const dir=path.resolve(__dirname,'../artifacts');await fs.mkdir(dir,{recursive:true});
  const snap=()=>page.evaluate(()=>WWMDebug.snapshot());
+ function restoreNative(){if(process.env.WWM_CDP&&process.env.WWM_PROCESS_ID)execFileSync('powershell',['-NoProfile','-ExecutionPolicy','Bypass','-File',path.join(__dirname,'desktop-window.ps1'),'-GameProcessId',process.env.WWM_PROCESS_ID,'-Action','restore'],{stdio:'ignore'});}
  async function stepTo(x,y){
    for(const [axis,target,positive,negative] of [['x',x,'ArrowRight','ArrowLeft'],['y',y,'ArrowDown','ArrowUp']]){
      let state=await snap();if(Math.abs(state.player[axis]-target)<.085)continue;
      const key=state.player[axis]<target?positive:negative;await page.keyboard.down(key);
-     const deadline=Date.now()+16000;
-     while(Date.now()<deadline){await page.waitForTimeout(25);state=await snap();if(state.won||Math.abs(state.player[axis]-target)<.085||(key===positive?state.player[axis]>target:state.player[axis]<target))break;}
+     const deadline=Date.now()+16000;let previousTime=state.time,stalledAt=Date.now();
+     while(Date.now()<deadline){await page.waitForTimeout(25);state=await snap();
+       if(state.time!==previousTime){previousTime=state.time;stalledAt=Date.now();}
+       else if(Date.now()-stalledAt>1000&&process.env.WWM_PROCESS_ID){restoreNative();stalledAt=Date.now();console.log('NOTE restored externally minimized desktop test window');await page.keyboard.down(key);}
+       if(state.paused&&state.modal==='pause'){
+         // Native automation can lose foreground to the desktop app; resume through the UI.
+         console.log('NOTE external focus loss paused play; clicked Resume and restored held direction');
+         await page.locator('#modal-actions button').first().click();await page.keyboard.down(key);continue;
+       }
+       if(state.won||Math.abs(state.player[axis]-target)<.085||(key===positive?state.player[axis]>target:state.player[axis]<target))break;}
      await page.keyboard.up(key);
+     // Input delivery can overshoot a tile center on a busy desktop. Correct with
+     // short real key taps instead of changing game state or treating it as a game fault.
+     state=await snap();
+     for(let correction=0;correction<5&&!state.won&&Math.abs(state.player[axis]-target)>.16;correction++){
+       if(state.paused&&state.modal==='pause')await page.locator('#modal-actions button').first().click();
+       const fix=state.player[axis]<target?positive:negative;
+       await page.keyboard.down(fix);await page.waitForTimeout(Math.min(65,Math.abs(state.player[axis]-target)/3.2*700));await page.keyboard.up(fix);await page.waitForTimeout(20);state=await snap();
+     }
      if(!state.won)assert.ok(Math.abs(state.player[axis]-target)<.18,`could not reach ${axis}=${target}: ${JSON.stringify(state)}`);
    }
  }
@@ -23,6 +41,7 @@ const {chromium}=requireRuntime('playwright');
  try{
   if(!process.env.WWM_CDP)await page.goto(process.env.TEST_URL||'http://localhost:5183');
   else await page.waitForURL('**/index.html');
+  restoreNative();
   await page.waitForFunction(()=>window.WWMDebug);
   const wantedLanguage=process.env.WWM_LANGUAGE||'en';
   if((await snap()).language!==wantedLanguage)await page.locator('#language').click();

@@ -1,33 +1,47 @@
-# Official event verification — 2026-11-04
+# thatgamejam #02 — rules and submission audit
 
-Primary source fetched directly: https://itch.io/jam/thatgamejam02
+Official rules fetched directly November 4, 2026: https://itch.io/jam/thatgamejam02 . Official theme: https://www.taptap.cn/moment/862753834106094594 . Prior chat summaries were not treated as the final rules source.
 
-Official theme announcement also fetched: https://www.taptap.cn/moment/862753834106094594
+| Requirement | Project handling |
+| --- | --- |
+| Deadline | Official timestamp November 8, 07:59 UTC = **2026-11-08 15:59 Beijing**. Target November 7 evening. |
+| Language | English default on clean launch; complete selectable Simplified Chinese. |
+| Windows or Mac | Actual Windows x64 EXE and complete folder supplied, .NET4.8/WebView2 prerequisites disclosed. No Mac build claimed. |
+| Original work | New project; entrant confirms made specifically for this event, not entered in another jam. |
+| AI | Explicit project-specific disclosure in game, credits, online document and questionnaire. |
+| Theme recording | Optional; if used keep unmodified and only in jam entry. No official recording shipped. Composer credited by event: Jason Grace. |
+| One submission platform | Entrant selected TapTap. No itch.io entry submitted. |
+| Team | Human entrant 何添雨 / RainStar工作室. Private email excluded from public source and archives. |
 
-The official itch.io page embeds the theme at https://www.youtube.com/watch?v=z71a6UtZ6GY and provides a download link. The announcement contains a video, not an accessible transcript of musical content. **The agent did not listen to or perceptually analyze the track.** Page retrieval does not count as listening. No timestamps, emotional changes or musical suitability are claimed. The optional human listening question remains unanswered at this report's creation.
+TapTap list/detail dates disagree (November 8 00:00 / November 18 00:00). No extension is assumed; target November 7 evening and follow the official deadline above.
 
-## Rules affecting this entry
+## Theme interpretation
 
-| Topic | Official wording / verified requirement | Project action |
+Entrant’s actual listening impression, supplied November 5, 2026: “空灵感，有种故事发生前的铺垫，悠长启迪人” — an ethereal feeling, a prelude before a story begins, lingering and thought-provoking. The creative response is waiting for a past self to answer, bridges becoming reachable, and remembered footsteps lighting the ending. This is an attributed creative interpretation. The development agent did not listen; no musical sections, instrumentation, tempo or timestamps are invented. No official recording is bundled; original synthesized effects and a replaceable local music interface remain.
+
+## Separate platform states
+
+Updated November 5, 2026 (Beijing). These are three independent states:
+
+| Item | Actual platform evidence | Result |
 | --- | --- | --- |
-| Deadline | Page machine timestamp `2026-11-08 07:59:00` UTC; prose Nov 7 @ 23:59 PT | **November 8, 2026 at 15:59 Beijing time**. Target actual submission by November 7 evening. No reminder/scheduled job has been created. |
-| Theme | Music track; any genre; no requirement to include the recording or make a rhythm game | Mechanics developed first; genuine listening and a resulting theme statement remain pending. |
-| Language | "Submitted games must use English as the default language." | English first launch, full Simplified Chinese toggle; language preference saved locally. |
-| Platform | "you must provide a build that runs on either Windows or Mac" | Actual Windows x64 desktop build supplied. WebView2/.NET prerequisites disclosed. No Mac build claimed. |
-| Originality | "Can I submit an existing project? No." | Independent new Walk With Me folder. Earlier Little Merge game not reused as the entry. |
-| AI | Clearly disclose generated parts; missing disclosure disqualifies | Explicit disclosure in game credits, CREDITS.md and draft game description. |
-| Recording license | "use it unmodified and only within your jam entry"; no remix/sampling/rearrangement | Official recording not included. Effects are original synthesized notes. |
-| Submission platform | itch.io; China entrants unable to access may use official TapTap event. "Please submit each game on one platform only." | No submission made. Choose one platform; not the ordinary H5 upload flow by assumption. |
-| Team | Up to five; all contributors listed; one submitting account; final roster at submission | Human display names / author roster / account remain entrant-supplied. |
-| Content/assets | Own rights or properly licensed resources; universal values | Original procedural art/text/code plus redistributable Microsoft WebView2 components and notices. |
-| Revisions | Can update before deadline; files locked afterward until winners announced | Build before deadline, verify archive and desktop launch, then submit. |
+| Game version V-20261104 | Formal submit HTTP422: “发布额度不足：滚动 168 小时最多首次发布 3 款、滚动 24 小时最多首次发布 1 款，请调整发布安排”. Readback draft / “未发布”, only draft_created. | Not submitted to review; not online. Content precheck passed, no blockers. Immediate release after approval remains authorized. |
+| AI declaration | ai-declaration / reviewing | Awaiting qualification review. Truthful AI disclosure retained. |
+| thatgamejam #02 | Last successful activity read: “已拒绝”; reason “游戏发布状态应为「正式上线」或「试玩」” | Questionnaire 8/8 submitted once, but not accepted participation. “提交成功” was only a receipt acknowledgement. |
 
-## Actual submission materials
+Store: https://developer.taptap.cn/v3/520515/app/1027904/store/update
 
-The actual logged-in TapTap questionnaire was opened on November 4 for existing app **1027904**, developer **520515**. Platform activity **18** differs from creation event **29**. No duplicate game was created. The form requires instructions, a complete walkthrough video URL, member name/email, AI usage with online details, country, background, first-jam answer and originality confirmation. The entrant-supplied facts are saved in a draft. The game has not been submitted to this activity or itch.io.
+AI: https://developer.taptap.cn/v3/520515/app/1027904/store/qualifications
 
-**Deadline discrepancy:** the TapTap activity list showed November 8 at 00:00, whereas its detail/questionnaire showed November 18 at 00:00. The official itch.io rule remains November 8 at 15:59 Beijing. An extension is not assumed; target November 7 evening.
+Activity: https://developer.taptap.cn/v3/520515/activity-center/18
 
-Prepared: real Windows ZIP, browser ZIP, complete source, checksums, English/Chinese controls, public AI/material document, store images and an approximately 60-second unaccelerated, silent, keyboard-driven full four-room video. This is a practiced solution, not independent first-play timing. The uploaded video has an API-provided signed playback URL; a durable public submission link remains unresolved. The signed URL responds successfully; removing its signature returns HTTP 400. Do not use this potentially expiring URL as a permanent submission link.
+The entrant consented to the platform agreement, confirmed independent-game upgrade, and accepted the AI-review warning before the latest submit attempt. No blind retry or quota workaround. The refusal does not identify which rolling quota is exhausted or its exact reset time.
 
-The H5 app offers no Windows package slot. A local Windows build does not establish delivery to judges: a stable public download must still be provided, along with an online AI-disclosure document. The entrant consented to the platform agreement and reported the official QR phone test worked. Theme listening and truthful inspiration remain pending. No activity submission or formal store review has been performed.
+
+## Materials and necessary next steps
+
+Windows/browser/source ZIPs and checksums: https://github.com/tianyuh411-byte/walk-with-me/releases . Public instructions/AI disclosure: https://tianyuh411-byte.github.io/walk-with-me/ . Full four-room video: https://github.com/tianyuh411-byte/walk-with-me/releases/download/v1.0.0/walk-with-me-full.mp4 . The roughly 60-second silent, unaccelerated known-solution video does not measure first-time play duration.
+
+The landscape H5 package is ready and bound, store text/icon/promotional art/three genuine screenshots/gameplay video saved; entrant reports official QR phone test normal. These are preparation facts, not online or participation approval.
+
+Required: resolve/wait out first-publication quota; submit version under existing authorization when eligible; obtain necessary approval and live/trial state; then update/re-submit activity and verify actual acceptance before deadline. No further personal facts are missing. Independent first-time full play and audible feedback checks remain recommended. Advertising finance/filing/eligibility is a separate future task; no ads implemented.

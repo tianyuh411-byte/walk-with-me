@@ -15,7 +15,9 @@ const{chromium}=require('C:/Users/34813/.cache/codex-runtimes/codex-primary-runt
   if(data.video)await text('游戏演示视频链接（完整流程走一遍）',data.video);
   if(data.links)await text('预告片或其他视频素材、设计文档或 pitch deck 链接',data.links);
   for(const [n,value] of ['学生','是','是，专门为 thatgamejam#2 制作'].entries()){
-   await p.getByRole('combobox').nth(n).click();
+   const control=p.getByRole('combobox').nth(n).locator('xpath=ancestor::div[contains(@class,"ant-select-single")][1]');
+   if((await control.innerText()).trim()===value)continue;
+   await control.click();
    await p.locator('.ant-select-dropdown:visible .ant-select-item-option-content').getByText(value,{exact:true}).click();
   }
   await p.getByRole('button',{name:'保存草稿',exact:true}).click();

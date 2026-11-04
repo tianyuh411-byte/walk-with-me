@@ -1,45 +1,36 @@
-# Verification record
+# Verification record — November 5, 2026
 
-Development date: 2026-11-04, Asia/Shanghai. This record separates simulation assertions, real input execution, visual review, and missing human checks.
+## Actual input versus isolated tests
 
-## Completed before Windows packaging
+Playwright sends keyboard/pointer input to the running game. WWMDebug is read-only observation; no positions, room indices or win flags are injected. This is script-driven actual operation with known solutions, not independent human playtesting.
 
-- First-room acceptance gate: actual browser **R + arrow key events** from title, recorded path to A, second R, room rewound, echo held A, player crossed the bridge and reached the exit. Passed before adding rooms 2–4.
-- Node engine tests: **7/7 passed**. Includes full recorded solution plans, exact 12-second cap, final-position hold, clean reset, paused time, occupancy handoffs, closing bridge recovery, collision-free replay, and echo inability to finish the room.
-- Full Edge browser run: title → room 1 → room 2 → room 3 → room 4 → ending. All routes performed through real keyboard events, with 3 seconds of actual waiting in rooms 3/4. Read-only snapshots observed positions and completion; no game state was injected or teleported.
-- Browser boundary checks: automatic 12-second finish; early finish; four successive re-recordings; reset clears echo/samples/time/plates/bridges; Esc freezes replay and resumes; a blur event pauses and clears input; WASD movement; sound on/off button state; 960×720 viewport resize followed by movement; 390×844 layout and touch-control pointer movement; no horizontal overflow and no JavaScript console errors.
-- Human-readable screenshots inspected by the agent: title and first-room echo/bridge view. Further screenshot review and desktop results are appended after execution.
+The public v1.0.0 Windows ZIP was anonymously downloaded, SHA256 matched, extracted completely and its EXE launched on this Windows machine. All four rooms through ending passed real keyboard input (artifacts/delivery-check/windows-playthrough.log). Early finish, automatic12-second cap, repeated recordings, clean T reset, Esc/synthetic blur pause, WASD and mute passed. Earlier actual browser runs passed all rooms in English and Chinese, narrow layouts and touch-pointer controls. The entrant separately reported official QR phone testing normal; device unspecified.
 
-This is **automated, agent-directed actual input playthrough**, not an independent human playtest. No claim is made that a human found the first-time puzzles clear or measured a 5–8 minute duration.
+## v1.0.1 native-window correction
 
-## Checks still requiring separate evidence
+Initial public-build rechecks did not reliably observe pause 400ms after native minimize. The host now explicitly handles WindowState.Minimized as well as Deactivate, covering minimize before acquiring focus. The test polls every100ms with a bounded timeout because requestAnimationFrame polling can stop in a minimized window. A discarded elapsed assertion incorrectly included PowerShell startup. Failed attempts were not counted as passes.
 
-- Windows executable launch and actual desktop playthrough: completed; see results below.
-- Real OS-level window deactivation/reactivation and resize: completed through native minimize/restore/resize. A human physical Alt-Tab sequence is not claimed.
-- Physical phone, macOS, clean Windows machine without existing runtimes, minimum supported GPU/device: not tested.
-- Audible sound quality: audio state/code tested; the agent has not listened to the resulting speakers. Human audio check required.
-- Theme audio: not listened to. No fit analysis performed.
-- Independent human full run, first-time tutorial usability and duration: pending.
-- Real logged-in jam submission / uploaded artifact download / judging form: not attempted.
+The rebuilt actual EXE passed native minimize → time frozen → restore still paused → explicit Resume advances time → resize1000×780 → playback and D movement (native-window-v101.log). The Windows Chinese check passed title/room/status/pause, live EN/ZH switching preserving the echo, preference persistence and return to English (native-language-v101.log).
+
+Full-run attempts interrupted by external window focus/occlusion were recorded as failures. The runner now explicitly clicks Resume during a movement step if an external focus loss pauses play. Final automation may use externally supplied Chromium occlusion flags solely to keep rendering while other windows cover the game; these flags and the CDP port are not enabled by the shipped EXE. See DELIVERY.md for final results.
+
+Final v1.0.1 result: **all four rooms through the ending passed in the actual rebuilt Windows EXE**, followed by the 12-second cap, early finish, repeated re-records, T cleanup, Esc/blur time freeze, WASD and mute (windows-playthrough-v101.log). One external focus pause was resumed using the visible UI. The separate same-version browser run also passed four rooms, boundary operations, resize and touch input (browser-playthrough-v101.log). Overshooting tile centers in some automation attempts was corrected with short real key taps, never state injection. The final launcher used external CDP/occlusion options; the delivered host does not set them.
+
+## Automatic checks
+
+Additional actual browser keyboard run passed pressure overlap, both handoff directions, closure after both actors leave, and standing on a fading bridge until complete clean reset (pressure-playthrough-v101.log). This test also uses only keyboard actions and read-only observations.
+
+node --test tests/engine.test.cjs: 7/7 passed. Covers planned routes, recording cap, endpoint hold/reset, pause clock, pressure handoff, bridge fade under player and echo collision/exit restrictions. These isolated engine tests are not actual playing.
+
+tools/verify-release.py checks ZIP CRC, runtime bytes equal source, real x64 PE, WebView2 dependencies/licenses, full source and SHA256 manifest. Fresh result: release/VALIDATION.json. tools/language-check.cjs checks default English, EN/ZH keys, persistence, state-preserving language changes and narrow layouts.
+
+## Unverified / limitations
+
+- Independent new-player full run, tutorial clarity and actual5–8 minute duration.
+- Audible quality by the agent. Entrant supplied theme impression; agent did not listen.
+- Clean Windows without existing prerequisites, other hardware, physical human Alt-Tab and Mac. No Mac binary.
+- Physical-phone testing is entrant-reported; touch simulation is separate.
 
 ## Reproduce
 
-`npm test` for engine assertions. Run `npm start`, then `node tools/playtest.cjs` for browser input execution. Artifacts are written to `artifacts/`. Optional `WWM_CDP=http://127.0.0.1:9337` attaches the same full input walkthrough to an already launched Windows WebView2 build; this debug port is enabled only by the external test launcher, not by the release executable.
-
-## Actual Windows desktop results
-
-The C# Windows x64 executable compiled successfully with .NET Framework and was launched from the built folder on this machine. It loaded its bundled files through the local WebView2 virtual host. The **full four-room keyboard walkthrough passed inside this executable**, including ending, 12-second cap, early finish, repeated re-records, reset, Esc/blur pause, WASD and sound-button checks. No browser-only simulation was substituted for this desktop pass.
-
-`tools/desktop-check.cjs` also operated the actual WinForms window through native Win32 calls: restore → start recording → minimize → confirm time frozen → restore → confirm still paused → explicit resume → confirm time advances → finish recording → resize to 1000×780 → confirm playback → actual D movement. Both native checks passed. Screenshot: `artifacts/09-windows-resized.png`.
-
-Two verification-tool issues were corrected: an initial CDP attach waited for a new page while an existing page was still navigating; an initial native-resume assertion waited a fixed 250 ms before WebView2 rendering resumed. The tools now observe the existing page and wait for the actual simulation clock. Failed attempts were not counted as passes.
-
-Visual review also covered room 3, the ending, narrow mobile layout and native resized view. The ending lights now use the last recording's actual coordinates, rather than a decorative substitute. Final rebuild includes this change and both languages.
-
-## English / Simplified Chinese verification
-
-Complete English and Chinese packs have identical UI, HTML, ARIA and per-room keys. `node tools/language-check.cjs` passed: clean profile defaults to English; switching translates the title and room; reload preserves Chinese preference; switching during recording/playback keeps samples, mode, time and echo duration; Chinese pause freezes time; help, hints and full solutions are Chinese; 320/390/960 widths have no overflow; switching back and reloading restores English. Desktop and mobile Chinese screenshots were visually inspected.
-
-The full four-room Chinese browser walkthrough passed through real keyboard events, including the ending, 12-second cap, pause/resume, repeated recordings and reset. No independent human translation review is claimed.
-
-Final Windows bilingual acceptance also passed (`tools/desktop-language-check.cjs`): the rebuilt executable displays the Chinese title, room, recording/playback status and pause dialog; switching EN/ZH during replay preserves the same echo; reload preserves Chinese; switching back restores English. Final Windows screenshot: `artifacts/13-final-windows-zh.png`. A startup page-navigation race in this tool was fixed before the successful run. The game executable was compiled from the included C# host and includes both language packs.
+npm test. Start npm start, then node tools/playtest.cjs and node tools/language-check.cjs with Playwright (set WWM_NODE_MODULES if necessary). For actual desktop checks externally enable a WebView2 CDP port, set WWM_CDP and WWM_PROCESS_ID, then run desktop-check.cjs, desktop-language-check.cjs, playtest.cjs or plate-playtest.cjs. Normal release launches have no debugging port. Screenshots/logs in artifacts are excluded from source archives.
